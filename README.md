@@ -1,2 +1,2 @@
-# huawei-push
-a copy of huawei-push (https://github.com/yilee/huawei-push.git)
+# xiaomi-push
+华为推送服务 Golang SDK
