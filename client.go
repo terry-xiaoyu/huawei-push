@@ -3,7 +3,6 @@ package huaweipush
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"net/url"
 	"strconv"
 	"time"
@@ -53,7 +52,6 @@ func (c *HuaweiPushClient) SingleSend(ctx context.Context, n *SingleNotification
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.SingleSend(ctx, n)
 	}
@@ -77,7 +75,6 @@ func (c *HuaweiPushClient) BatchSend(ctx context.Context, b *BatchNotification) 
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.BatchSend(ctx, b)
 	}
@@ -102,7 +99,6 @@ func (c *HuaweiPushClient) LBSSend(ctx context.Context, n *Notification, locatio
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.LBSSend(ctx, n, location)
 	}
@@ -126,7 +122,6 @@ func (c *HuaweiPushClient) NotificationSend(ctx context.Context, n *Notification
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.NotificationSend(ctx, n)
 	}
@@ -153,7 +148,6 @@ func (c *HuaweiPushClient) SetUserTag(ctx context.Context, token, tagKey, tagVal
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.SetUserTag(ctx, token, tagKey, tagValue)
 	}
@@ -177,7 +171,6 @@ func (c *HuaweiPushClient) QueryAppTags(ctx context.Context) (*TagsResult, error
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.QueryAppTags(ctx)
 	}
@@ -203,7 +196,6 @@ func (c *HuaweiPushClient) DeleteUserTag(ctx context.Context, token, tagKey stri
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.DeleteUserTag(ctx, token, tagKey)
 	}
@@ -228,7 +220,6 @@ func (c *HuaweiPushClient) QueryUserTag(ctx context.Context, token string) (*Tag
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.QueryUserTag(ctx, token)
 	}
@@ -257,7 +248,6 @@ func (c *HuaweiPushClient) QueryMsgResult(ctx context.Context, requestID, token 
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.QueryMsgResult(ctx, requestID, token)
 	}
@@ -282,7 +272,6 @@ func (c *HuaweiPushClient) GetTokenByDate(ctx context.Context, date string) (*Ge
 		return nil, err
 	}
 	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		fmt.Println("huawei token error", result)
 		tokenInstance.AccessToken = ""
 		return c.GetTokenByDate(ctx, date)
 	}

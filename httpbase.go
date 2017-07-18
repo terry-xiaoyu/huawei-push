@@ -1,7 +1,6 @@
 package huaweipush
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -24,7 +23,6 @@ func doPost(ctx context.Context, url string, form url.Values) ([]byte, error) {
 tryAgain:
 	res, err = ctxhttp.Do(ctx, client, req)
 	if err != nil {
-		fmt.Println("huawei push post err:", err, tryTime)
 		select {
 		case <-ctx.Done():
 			return nil, err
