@@ -36,6 +36,15 @@ func (c *HuaweiPushClient) defaultParams(params url.Values) (url.Values, error) 
 }
 
 func (c *HuaweiPushClient) SingleSend(ctx context.Context, n *SingleNotification) (*PushResult, error) {
+	result, err := c.singleSend(ctx, n)
+	if result.ResultCode == NoPermission || result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
+		tokenInstance.AccessToken = ""
+		return c.singleSend(ctx, n)
+	}
+	return result, err
+}
+
+func (c *HuaweiPushClient) singleSend(ctx context.Context, n *SingleNotification) (*PushResult, error) {
 	params := n.Form()
 	params, err := c.defaultParams(params)
 	if err != nil {
@@ -51,10 +60,7 @@ func (c *HuaweiPushClient) SingleSend(ctx context.Context, n *SingleNotification
 	if err != nil {
 		return nil, err
 	}
-	if result.Error == SessionTimeoutError || result.Error == SessionInvalidError {
-		tokenInstance.AccessToken = ""
-		return c.SingleSend(ctx, n)
-	}
+
 	return &result, nil
 }
 
